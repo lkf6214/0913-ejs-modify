@@ -129,12 +129,16 @@
       <div class="board_write">
         <span>현재 등록 글 : &nbsp; <%= articleCounts %></span>
         <a class="btn red" href="/board/write">글쓰기</a>
+        <a class="btn orange" href="/login/logout">로그아웃</a>
       </div>
       <div class="board_body">
         <ul class="board">
           <% if (articleCounts> 0) { %>
           <% for(let i=0; i < articleCounts; i++) { %>
           <li>
+            <div class="author">
+              작성자 <%= ARTICLE[i].id %>
+            </div>
             <div class="title">
               <%= ARTICLE[i].title %>
             </div>
@@ -142,8 +146,10 @@
               <%= ARTICLE[i].content %>
             </div>
             <div class="foot">
+              <% if (ARTICLE[i].id ===userId) { %>
               <a class="btn orange" href="board/modify/title/<%= ARTICLE[i].title %>">수정</a>
               <a class="btn blue" href="#" onclick="deleteArticle('<%= ARTICLE[i].title %>')">삭제</a>
+              <% } %>
             </div>
           </li>
           <% } %>
